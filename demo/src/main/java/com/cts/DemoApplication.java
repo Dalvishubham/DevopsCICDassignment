@@ -20,7 +20,7 @@ public class DemoApplication {
 			return "hello world";
 		}
 		@GetMapping("/gethello")
-		public String hello() {
+		public String get() {
 			return "hello From CICD";
 		}
 	}
