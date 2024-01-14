@@ -10,6 +10,14 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Cache Maven dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
+          restore-keys: |
+            ${{ runner.os }}-maven-
+
       - name: Checkout repository
         uses: actions/checkout@v2
 
@@ -19,19 +27,25 @@ jobs:
           distribution: 'adopt'
           java-version: '11'
 
-      - name: Cache Maven dependencies
-        uses: actions/cache@v2
-        with:
-          path: ~/.m2
-          key: ${{ runner.os }}-maven-${{ hashFiles('**/pom.xml') }}
-          restore-keys: |
-            ${{ runner.os }}-maven-
+      - name: Debug
+        run: |
+          pwd
+          ls -la
+          echo "Java Home: $JAVA_HOME"
+          java -version
+          mvn -version
 
       - name: Build with Maven
-      cd /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
-        run: mvn clean package
+        run: |
+          cd home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
+          mvn clean package
 
       - name: Run tests
-        run: mvn test
+        run: |
+          cd home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
+          mvn test
 
-    
+      - name: Run PMD static code analysis
+        run: |
+          cd home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
+          mvn pmd:check
