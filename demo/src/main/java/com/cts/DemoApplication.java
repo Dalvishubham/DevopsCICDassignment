@@ -19,6 +19,10 @@ public class DemoApplication {
 		public String hello() {
 			return "hello world";
 		}
+		@GetMapping("/gethello")
+		public String hello() {
+			return "hello From CICD";
+		}
 	}
 
 
