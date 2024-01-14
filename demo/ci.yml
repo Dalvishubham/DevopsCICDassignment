@@ -39,13 +39,16 @@ jobs:
         run: |
           cd /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
           mvn clean package
+        working-directory: /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
 
       - name: Run tests
         run: |
           cd /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
           mvn test
+        working-directory: /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
 
       - name: Run PMD static code analysis
         run: |
           cd /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
           mvn pmd:check
+        working-directory: /home/runner/work/DevopsCICDassignment/DevopsCICDassignment/demo
